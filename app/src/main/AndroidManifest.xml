@@ -22,10 +22,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
-
+        <activity android:name=".MainActivity"
+                  android:theme="@style/noAnimt">
         </activity>
-        <activity android:name=".mvp.ui.SplashActivty">
+        <activity android:name=".mvp.ui.SplashActivty"
+        android:theme="@style/noAnimt">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

@@ -6,6 +6,20 @@
         <item name="colorPrimary">@color/colorP6</item>
         <item name="colorPrimaryDark">@color/colorP6</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
+
+    <style name="noAnimt" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+
+
+    <declare-styleable name="LoadingButton">
+        <attr name="contentPaddingLR" format="dimension|reference" />
+        <attr name="contentPaddingTB" format="dimension|reference" />
+
+        <attr name="radiu" format="dimension|reference" />
+    </declare-styleable>
 
 </resources>

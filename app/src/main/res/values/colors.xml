@@ -29,6 +29,12 @@
     <color name="colorB8">#787D85</color>
     <color name="colorB9">#E6E6E6</color>
 
+    <!--银白色-->
+    <color name="colorYin">#e9e7ef</color>
+    <!--灰蓝色-->
+    <color name="colorHuiL">#a1afc9</color>
+    <!--花白-->
+    <color name="colorHuabai">#c2ccd0</color>
 
 
 </resources>

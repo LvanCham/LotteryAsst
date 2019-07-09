@@ -1,32 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorB9">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/Spalash_bg"
+    <com.scwang.wave.MultiWaveHeader
+            android:id="@+id/waveHeader"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@mipmap/splash_bg"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/Tv_Content"/>
+            app:layout_constraintBottom_toTopOf="@+id/Tv_Content"
+            app:mwhStartColor="@color/colorP5"
+            app:mwhCloseColor="@color/colorAccent"
+            app:mwhColorAlpha="0.3"
+            app:mwhWaves="
+            70,25,1.4,1.4,-26
+            100,5,1.4,1.2,15
+            420,0,1.15,1,-10
+            520,10,1.7,1.5,20
+            220,0,1,1,-15"/>
 
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/Tv_Content"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="“智欲圆而行欲方，胆欲大而心欲小”"
             android:textColor="@android:color/black"
             android:gravity="center"
+            android:layout_marginBottom="100dp"
+            android:textSize="16sp"
+           />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Tv_en"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorP4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="250dp"
+            android:textSize="18sp"
+
+            android:paddingStart="80dp"
+            android:paddingEnd="80dp"
     />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/Tv_zh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorP4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Tv_en"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:paddingStart="50dp"
+            android:paddingEnd="50dp"
+    />
+
+
+
+    <View
+            android:id="@+id/view_puppet"
+            android:background="@color/colorP10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <com.cham.lotteryasst.widget.PageTurnView
+            android:id="@+id/pageTurnView"
+               android:layout_width="100dp"
+               android:layout_height="100dp"
+               app:layout_constraintTop_toBottomOf="@+id/Tv_Content"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               />
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

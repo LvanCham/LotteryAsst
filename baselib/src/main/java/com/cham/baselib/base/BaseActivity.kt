@@ -18,7 +18,7 @@ abstract class BaseActivity :AppCompatActivity() ,IActivity{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ScreenUtils.adaptScreen4HorizontalSlide(this, 375)
+        ScreenUtils.adaptScreen4VerticalSlide(this, 375)
        // BarUtils.setStatusBarColor(this, Color.parseColor("#1FBAF3"), 255)
         BarUtils.setStatusBarAlpha(this)
         setContentView(initLayout())
