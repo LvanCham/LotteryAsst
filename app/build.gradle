@@ -51,9 +51,13 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.23.1'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
-
     //水波纹
     implementation 'com.scwang.wave:MultiWaveHeader:1.0.0-alpha-1'
+
+    //navigation
+
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-ui:2.0.0'
 
 
 }

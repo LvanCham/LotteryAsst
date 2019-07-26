@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ContentPanel"
+
         tools:context=".MainActivity">
 
     <!--ConstraintLayout2.0出来了 跟进-->
@@ -36,11 +37,26 @@
 
     />
 
-    <View
+
+    <com.cham.lotteryasst.widget.DiskView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"/>
+
+
+
+
+    <RelativeLayout
             android:id="@+id/ViewPuppet"
-            android:background="@color/colorP10"
+            android:background="@color/colorP9"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="invisible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

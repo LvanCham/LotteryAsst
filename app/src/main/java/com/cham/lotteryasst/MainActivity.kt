@@ -1,23 +1,22 @@
 package com.cham.lotteryasst
 
 import android.animation.Animator
+import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.blankj.utilcode.util.BarUtils
 import com.cham.baselib.base.BaseActivity
 
 import com.cham.lotteryasst.utils.SpUtils
 import kotlinx.android.synthetic.main.activity_main.*
-import android.animation.ValueAnimator
-import android.opengl.ETC1.getWidth
-import android.opengl.ETC1.getHeight
+
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AlphaAnimation
-
-
-
-
+import com.cham.lotteryasst.service.OneService
+import kotlin.math.hypot
 
 
 class MainActivity : BaseActivity() {
@@ -32,17 +31,19 @@ class MainActivity : BaseActivity() {
      return R.layout.activity_main
     }
 
+
     override fun initData() {
 
         mX = intent.getIntExtra("cx", 0)
         mY = intent.getIntExtra("cy", 0)
 
-        BarUtils.setStatusBarColor(this, resources. getColor(R.color.colorYin),0)
+
 
         btn_load.setOnClickListener {
             if(i==0){
                 i =1
                 btn_load.ProgressStart()
+             startService(Intent(this@MainActivity, OneService::class.java))
             }else{
                 i =0
                 btn_load.ProgressStop()
@@ -60,28 +61,27 @@ class MainActivity : BaseActivity() {
     fun createRevealAnimator(x:Int,y:Int) : Animator{
 
         var startRadius  = 0f
-        var endRadius  = Math.hypot(ContentPanel.height.toDouble(), ContentPanel.width.toDouble()).toFloat()
+        var endRadius  = hypot(ContentPanel.height.toDouble(), ContentPanel.width.toDouble()).toFloat()
         var animator  =  ViewAnimationUtils.createCircularReveal(ContentPanel,
             x,y,startRadius,endRadius)
-        animator.duration = 600
+        animator.duration = 1000
         animator.interpolator = AccelerateDecelerateInterpolator()
         animator .addListener(object : Animator.AnimatorListener{
             override fun onAnimationRepeat(animation: Animator?) {
             }
 
             override fun onAnimationEnd(animation: Animator?) {
-                ViewPuppet.startAnimation(createAlphaAnimation());
+
                 //动画结束时，揭露动画设置为不可见
-                ViewPuppet.visibility = View.INVISIBLE;
+                ViewPuppet.visibility = View.INVISIBLE
             }
 
             override fun onAnimationCancel(animation: Animator?) {
             }
 
             override fun onAnimationStart(animation: Animator?) {
+                ViewPuppet.startAnimation(createAlphaAnimation())
             }
-
-
         })
 
         return animator
@@ -89,8 +89,8 @@ class MainActivity : BaseActivity() {
 
 
     private fun createAlphaAnimation(): AlphaAnimation {
-        val aa = AlphaAnimation(1f, 0f)
-        aa.duration = 400
+        val aa = AlphaAnimation(2f, 0f)
+        aa.duration = 1000
         aa.interpolator = AccelerateDecelerateInterpolator()//设置插值器
         return aa
     }

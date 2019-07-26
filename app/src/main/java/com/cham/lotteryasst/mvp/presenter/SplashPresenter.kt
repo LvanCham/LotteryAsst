@@ -30,9 +30,7 @@ import javax.inject.Inject
 
 @ActivtyScope
 class SplashPresenter
-@Inject constructor(rootView: SplashContract.SplashView,
-                    model:SplashContract.SplashModel):
-    BasePresenter<SplashContract.SplashView,
+@Inject constructor(rootView: SplashContract.SplashView, model:SplashContract.SplashModel): BasePresenter<SplashContract.SplashView,
             SplashContract.SplashModel>(rootView,model) {
 
     /**
@@ -60,7 +58,6 @@ class SplashPresenter
             .subscribe(object : Observer<DailyEnglishEntity>{
                 override fun onNext(t: DailyEnglishEntity) {
                     mRootView.showDailyEn(t)
-
                 }
                 override fun onComplete() {}
                 override fun onSubscribe(d: Disposable) {}

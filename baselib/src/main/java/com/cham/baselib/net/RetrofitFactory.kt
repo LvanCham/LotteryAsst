@@ -39,8 +39,8 @@ class RetrofitFactory private constructor() {
     // 初始化时调用;
     init {
         // Header 相关的拦截器
-        intereceptor = Interceptor { chain ->
-
+        intereceptor = Interceptor {
+                chain ->
             val request = chain.request()
                 .newBuilder()
                 .addHeader("Content-Type", "application/json")
@@ -48,8 +48,6 @@ class RetrofitFactory private constructor() {
 //                .addHeader("token", AppPrefsUtils.getString(BaseConstant.KEY_SP_TOKEN))
                 .build()
             chain.proceed(request)
-
-
         }
 
         retrofit = Retrofit.Builder()
@@ -68,19 +66,16 @@ class RetrofitFactory private constructor() {
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
             .build()
-
     }
 
     // 日志拦截器
     private fun initLogInterceptor(): Interceptor {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
-
         return interceptor
     }
 
     // Header 数据   编码方式， 都是通过拦截器添加  Token 添加到 Header 里面
-
 
     fun <T> create(service: Class<T>): T {
         return retrofit.create(service)

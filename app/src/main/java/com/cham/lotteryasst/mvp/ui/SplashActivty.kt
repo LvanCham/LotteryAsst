@@ -33,8 +33,6 @@ import com.cham.lotteryasst.entity.DailyEnglishEntity
 class SplashActivty  : BaseMvpActivity<SplashPresenter>(),SplashContract.SplashView{
 
 
-
-
     override fun showDailyEn(str: DailyEnglishEntity) {
         Tv_en.text = str.content
         Tv_zh.text = str.note
