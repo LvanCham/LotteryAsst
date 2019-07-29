@@ -15,7 +15,12 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AlphaAnimation
+import com.cham.baselib.BASE_URL
+import com.cham.baselib.net.RetrofitFactory
+import com.cham.lotteryasst.api.ApiService
 import com.cham.lotteryasst.service.OneService
+import com.cham.lotteryasst.testSth.Test1
+import kotlinx.coroutines.*
 import kotlin.math.hypot
 
 
@@ -39,6 +44,19 @@ class MainActivity : BaseActivity() {
 
 
 
+        var  job =  GlobalScope.launch (Dispatchers.Main){
+
+            var content = fetchData()
+            Log.e("Coroutine1",content)
+        }
+
+        var  job2 =  GlobalScope.launch {
+
+            Log.e("Coroutine2",fetchData())
+            testA()
+
+        }
+
         btn_load.setOnClickListener {
             if(i==0){
                 i =1
@@ -54,9 +72,60 @@ class MainActivity : BaseActivity() {
             val animator = createRevealAnimator(mX, mY)
             animator.start()
         }
+
+        //--------------------------协程---- 好像不用start（）
+//        job.start()
+//        job2.start()
+        Log.e("Coroutine3","Stop")
+//
+//        runBlocking {     // 这块阻塞了主线程
+//            delay(2000L)  // 延迟2s，让jvm不挂掉
+//        }
+        Log.e("Coroutine4","Stop2")
+
+
+
+        val  job4 =   GlobalScope.launch(Dispatchers.Main){
+           var AAAA =  RetrofitFactory.instance(BASE_URL).create(ApiService::class.java).getAncientPoetry2()
+            Log.e("job4", AAAA.content)
+
+        }
+
+        val job5 = GlobalScope.launch(Dispatchers.Main){
+            var pop = RetrofitFactory.instance("http://open.iciba.com/")
+                .create(ApiService::class.java).getDailyEn2()
+            Log.e("job5", pop.content)
+
+        }
+
+        val job6 = GlobalScope.launch(Dispatchers.IO){
+            var pop = RetrofitFactory.insttt(BASE_URL).value.create(ApiService::class.java).getAncientPoetry2()
+            Log.e("job6", pop.content)
+        }
+
+//        var  p = Test1()
+
+
+
     }
 
 
+    fun testA()  = runBlocking<Unit>{
+
+        delay(1000L)
+        Log.e("Coroutine5","testA")
+
+        val job = launch {
+
+            delay(1000L)
+            Log.e("Coroutine6","testA1")
+        }.join()
+
+    }
+    suspend fun fetchData():String{
+        delay(2000)
+        return "content"
+    }
 
     fun createRevealAnimator(x:Int,y:Int) : Animator{
 

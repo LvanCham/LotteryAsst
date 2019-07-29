@@ -53,24 +53,27 @@ dependencies {
 
     api 'com.squareup.okhttp3:logging-interceptor:3.14.1'
 
-    api('com.squareup.retrofit2:retrofit:2.4.0') {
+    api('com.squareup.retrofit2:retrofit:2.6.0') {
         exclude module: 'okhttp'
         exclude module: 'okio'
     }
-    api('com.squareup.retrofit2:converter-gson:2.4.0') {
+    api('com.squareup.retrofit2:converter-gson:2.6.0') {
         exclude module: 'gson'
         exclude module: 'okhttp'
         exclude module: 'okio'
         exclude module: 'retrofit'
     }
 
-    api('com.squareup.retrofit2:adapter-rxjava2:2.4.0') {
+    api('com.squareup.retrofit2:adapter-rxjava2:2.6.0') {
         exclude module: 'okhttp'
         exclude module: 'retrofit'
         exclude module: 'okio'
     }
+
+
+
+
 //    api 'com.squareup.retrofit2:converter-scalars:2.5.0'
-//
 //    api 'com.squareup.retrofit2:retrofit-converters:2.5.0'
 
 
@@ -96,5 +99,9 @@ dependencies {
     api 'com.blankj:utilcode:1.20.3'
 
 
+    //lifecycle
+    api "androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02"
+    //viewmodel
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02"
 
 }

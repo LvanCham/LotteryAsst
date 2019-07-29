@@ -6,6 +6,7 @@ package com.cham.lotteryasst.api
 import com.cham.lotteryasst.entity.DailyEnglishEntity
 import com.cham.lotteryasst.entity.PoetryEntity
 import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 
 /**
@@ -26,5 +27,17 @@ interface ApiService {
      * */
     @GET("dsapi")
     fun getDailyEn():Observable<DailyEnglishEntity>
+
+
+
+    // 协程
+    @GET("all.json")
+    suspend   fun getAncientPoetry2(): PoetryEntity
+
+
+    @GET("dsapi")
+    suspend  fun getDailyEn2():DailyEnglishEntity
+
+
 
 }

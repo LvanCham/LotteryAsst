@@ -33,6 +33,7 @@
             </intent-filter>
         </activity>
         <service android:name=".service.OneService"/>
+        <service android:name=".service.MainAccessService"/>
     </application>
 
 </manifest>

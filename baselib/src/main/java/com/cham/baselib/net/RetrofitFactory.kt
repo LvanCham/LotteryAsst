@@ -1,6 +1,7 @@
 package com.cham.baselib.net
 
 import com.cham.baselib.BASE_URL
+
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +15,9 @@ import java.util.concurrent.TimeUnit
  *    私有的构造函数
  *    伴生对象  和 java 中的 静态类似
  */
-class RetrofitFactory private constructor() {
+class RetrofitFactory private constructor( baseurl :String ) {
+
+
     /**
      *  伴生对象
      *  1， 大多数情况下，Kotlin 推荐 使用包级别的 函数作为静态方法
@@ -29,8 +32,29 @@ class RetrofitFactory private constructor() {
      *
      */
     companion object {
+
+        /**
+         * 两种方法
+         * */
+        fun instance(s: String):RetrofitFactory {
+            val instance2: RetrofitFactory by lazy {
+                            RetrofitFactory(s)
+            }
+            return instance2
+        }
+
+
+        fun insttt(S:String):Lazy<RetrofitFactory> = lazy {
+
+            RetrofitFactory(S)
+
+        }
         // by lazy 就是线程安全的
-        val instance: RetrofitFactory by lazy { RetrofitFactory() }
+//        val instance: RetrofitFactory by lazy {
+//            RetrofitFactory("")
+//        }
+
+
     }
 
     private var retrofit: Retrofit
@@ -51,9 +75,8 @@ class RetrofitFactory private constructor() {
         }
 
         retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(baseurl)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(initClient())
             .build()
     }
@@ -62,9 +85,10 @@ class RetrofitFactory private constructor() {
     private fun initClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(intereceptor)      // Header 相关的拦截器
-            .addInterceptor(initLogInterceptor())// 日志拦截器
+            .addInterceptor( LoggingInterceptor())// 日志拦截器
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)
+
             .build()
     }
 
