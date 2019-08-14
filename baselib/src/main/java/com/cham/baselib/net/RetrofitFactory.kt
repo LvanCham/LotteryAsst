@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit
  */
 class RetrofitFactory private constructor( baseurl :String ) {
 
-
     /**
      *  伴生对象
      *  1， 大多数情况下，Kotlin 推荐 使用包级别的 函数作为静态方法
@@ -27,33 +26,25 @@ class RetrofitFactory private constructor( baseurl :String ) {
      *
      *   伴生对象看起来像是 java 中的静态成员，但是运行期仍是真实对象
      *   的实例成员
-     *
      *   伴生对象在编译后会生成一个静态内部类
      *
      */
     companion object {
-
+        @Volatile
+        var instance: RetrofitFactory? = null
         /**
          * 两种方法
          * */
         fun instance(s: String):RetrofitFactory {
-            val instance2: RetrofitFactory by lazy {
-                            RetrofitFactory(s)
+            if (instance == null) {
+                synchronized(RetrofitFactory::class) {
+                    if (instance == null) {
+                        instance = RetrofitFactory(s)
+                    }
+                }
             }
-            return instance2
+            return instance!!
         }
-
-
-        fun insttt(S:String):Lazy<RetrofitFactory> = lazy {
-
-            RetrofitFactory(S)
-
-        }
-        // by lazy 就是线程安全的
-//        val instance: RetrofitFactory by lazy {
-//            RetrofitFactory("")
-//        }
-
 
     }
 

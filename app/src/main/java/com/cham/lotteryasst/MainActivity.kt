@@ -19,9 +19,10 @@ import com.cham.baselib.BASE_URL
 import com.cham.baselib.net.RetrofitFactory
 import com.cham.lotteryasst.api.ApiService
 import com.cham.lotteryasst.service.OneService
-import com.cham.lotteryasst.testSth.Test1
+
 import kotlinx.coroutines.*
 import kotlin.math.hypot
+import kotlin.system.measureTimeMillis
 
 
 class MainActivity : BaseActivity() {
@@ -83,25 +84,44 @@ class MainActivity : BaseActivity() {
 //        }
         Log.e("Coroutine4","Stop2")
 
+        /**
+         * 协程的启动
+         * */
 
-
+        //UI线程
         val  job4 =   GlobalScope.launch(Dispatchers.Main){
-           var AAAA =  RetrofitFactory.instance(BASE_URL).create(ApiService::class.java).getAncientPoetry2()
-            Log.e("job4", AAAA.content)
+
+            try{
+                var AAAA =  RetrofitFactory.instance(BASE_URL).create(ApiService::class.java).getAncientPoetry2()
+                Log.e(TAG, AAAA.content +"    ${Thread.currentThread().name}")
+            }catch (e:Throwable){
+                Log.e(TAG, "    ${Thread.currentThread().name}   --- $e")
+            }
+
+
 
         }
 
-        val job5 = GlobalScope.launch(Dispatchers.Main){
-            var pop = RetrofitFactory.instance("http://open.iciba.com/")
-                .create(ApiService::class.java).getDailyEn2()
-            Log.e("job5", pop.content)
+        //UI线程
+//        val job5 = GlobalScope.launch(Dispatchers.Main){
+//
+//            var time = measureTimeMillis{
+//                var pop = RetrofitFactory.instance("http://open.iciba.com/")
+//                    .create(ApiService::class.java).getDailyEn2()
+//                Log.e("job5", pop.content+"   ---     ${Thread.currentThread().name}")
+//            }
+//
+//
+//            Log.e("time", "花费的时间 ： $time")
+//
+//
+//        }
 
-        }
-
-        val job6 = GlobalScope.launch(Dispatchers.IO){
-            var pop = RetrofitFactory.insttt(BASE_URL).value.create(ApiService::class.java).getAncientPoetry2()
-            Log.e("job6", pop.content)
-        }
+        //IO线程
+//        val job6 = GlobalScope.launch(Dispatchers.IO){
+//            var pop = RetrofitFactory.insttt(BASE_URL).value.create(ApiService::class.java).getAncientPoetry2()
+//            Log.e("job6", pop.content+"    ${Thread.currentThread().name}")
+//        }
 
 //        var  p = Test1()
 
